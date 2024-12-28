@@ -8,6 +8,7 @@ const {Text} = Typography;
 export const VideoList = () => {
     const [videos, setVideos] = useState([]);
     const [history, setHistory] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
     useEffect(() => {
 
@@ -20,6 +21,16 @@ export const VideoList = () => {
             .then(res => res.json())
             .then(data => {
                 setHistory(data)
+            });
+
+        fetch('/api/video/suggest', {
+            headers: {
+                "Authentication-Info": localStorage.getItem("username")
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setSuggestions(data)
             });
 
         fetch('/api/videos', {
@@ -63,7 +74,7 @@ export const VideoList = () => {
                                 <center>
                                     <Card title="Suggestions">
                                         <List className={"scroll"}
-                                              dataSource={videos}
+                                              dataSource={suggestions}
                                               renderItem={(video) => (<List.Item key={video.filename}
                                                                                  onClick={() => handleVideoClick(video.filename)}
                                                                                  style={{cursor: "pointer"}}>
