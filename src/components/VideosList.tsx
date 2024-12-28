@@ -69,7 +69,7 @@ export const VideoList = () => {
                                             <Empty description="Select a video to play"/>
                                         </div>
 
-                                    ) : (<ReactPlayer width={'100%'} url={`/api/video/${selectedVideo}`}/>)}
+                                    ) : (<ReactPlayer controls playing width={'100%'} url={`/api/video/${selectedVideo}`}/>)}
                                 </Card>
                             </center>
                             <Row gutter={24}>
