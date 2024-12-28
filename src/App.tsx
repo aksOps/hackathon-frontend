@@ -7,15 +7,15 @@ function App() {
 
 
     const isAuthenticated = () => {
-        return localStorage.getItem('username') !== "";
+        return localStorage.getItem('username');
     };
     return (<>
         <Router>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
+                <Route path="/signup" element={<Signup/>}/> {/* Add signup route */}
                 <Route path="/videos" element={isAuthenticated() ? <VideoList/> : <Navigate to="/login"/>}/>
-                <Route path="/" element={isAuthenticated() ? <VideoList/> : <Navigate to="/login"/>}/>
+                <Route path="/" element={<Navigate to="/login"/>}/>
             </Routes>
         </Router>
     </>)
