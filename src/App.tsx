@@ -1,23 +1,23 @@
 import {VideoList} from "./components/VideosList.tsx";
-import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
-import Signup from "./components/Signup.tsx";
 import Login from "./components/Login.tsx";
+import {useEffect} from "react";
 
 function App() {
 
 
+    useEffect(() => {
+        console.log(localStorage.getItem('username'))
+    }, [localStorage.getItem('username')])
+
     const isAuthenticated = () => {
-        return localStorage.getItem('username');
+        console.log(localStorage.getItem('username'))
+        if (localStorage.getItem('username') !== undefined && localStorage.getItem('username') !== null) {
+            // @ts-ignore
+            return localStorage.getItem('username').length > 0
+        }
     };
     return (<>
-        <Router>
-            <Routes>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/> {/* Add signup route */}
-                <Route path="/videos" element={isAuthenticated() ? <VideoList/> : <Navigate to="/login"/>}/>
-                <Route path="/" element={<Navigate to="/login"/>}/>
-            </Routes>
-        </Router>
+        {isAuthenticated() ? <VideoList/> : <Login/>}
     </>)
 }
 

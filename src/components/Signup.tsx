@@ -1,10 +1,8 @@
 import {useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
-import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
     const onFinish = async (values:any) => {
         setLoading(true);
@@ -17,11 +15,9 @@ const Signup = () => {
 
             if (response.status === 201) {
                 message.success('Signup successful. Please login');
-                navigate('/login');
             } else if (response.status === 208) {
                 await response.text();
                 message.warning('User Already exists. Please login instead');
-                navigate("/login")
             } else {
                 await response.text();
                 message.error('Signup failed');

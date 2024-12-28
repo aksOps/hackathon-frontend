@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Alert, Button, Card, Col, Empty, Layout, List, Row, Space, Typography} from 'antd';
 import ReactPlayer from "react-player";
-import {useNavigate} from "react-router-dom";
 
 const {Content} = Layout;
 const {Text} = Typography;
@@ -11,7 +10,6 @@ export const VideoList = () => {
     const [history, setHistory] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
-    const navigate = useNavigate();
     useEffect(() => {
 
 
@@ -59,7 +57,7 @@ export const VideoList = () => {
                 <Space direction={"vertical"}>
                     <Button type="primary" onClick={() => {
                         localStorage.removeItem("username");
-                        navigate("/login")
+                        window.location.reload();
                     }}>Logout</Button>
                     <Row gutter={[24, 24]}>
                         <Col span={18}>

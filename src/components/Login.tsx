@@ -1,11 +1,10 @@
 import {useState} from 'react';
-import {Button, Checkbox, Form, Input, message} from 'antd';
-import {useNavigate} from 'react-router-dom';
+import {Button, Checkbox, Drawer, Form, Input, message, Space} from 'antd';
+import Signup from "./Signup.tsx";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
-
+    const [signup, setSignup] = useState(false);
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
@@ -18,7 +17,7 @@ const Login = () => {
                     message.success('Login successful');
                     value.text().then(data => {
                         localStorage.setItem('username', data);
-                        navigate('/videos');
+                        window.location.reload();
                     })
                 }
             })
@@ -66,15 +65,27 @@ const Login = () => {
                 <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item wrapperCol={{offset: 8, span: 16}}>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                    Submit
-                </Button>
-            </Form.Item>
-            <Form.Item wrapperCol={{offset: 8, span: 16}}>
-                <a href="/signup">Signup</a>
-            </Form.Item>
+            <Space>
+                <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                    <Button type="primary" htmlType="submit" loading={loading}>
+                        Submit
+                    </Button>
+                </Form.Item>
+                <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                    <Button type="default" onClick={() => {
+                        setSignup(true)
+                    }} loading={loading}>
+                        Signup
+                    </Button>
+                </Form.Item>
+            </Space>
+
         </Form>
+        <Drawer placement={'right'} title="Signup" open={signup} onClose={() => {
+            setSignup(false)
+        }}>
+            <Signup/>
+        </Drawer>
     </div>);
 };
 
