@@ -1,0 +1,26 @@
+.scroll
+{
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px; /* Width of the entire scrollbar */
+}
+
+/* Style the scrollbar handle (thumb) */
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scroll thumb */
+    border-radius: 4px; /* Rounding of the thumb */
+    border: 2px solid transparent; /* Add a transparent border for spacing */
+    background-clip: padding-box; /* Makes the border part of the thumb */
+}
+
+/* Style the scrollbar track when hovered */
+.scroll::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color of the track */
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Darker color on hover */
+}
